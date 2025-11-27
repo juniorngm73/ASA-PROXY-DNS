@@ -1,0 +1,84 @@
+version: '3.8'
+
+# 1. Definição da Rede Customizada com IPs Estáticos
+networks:
+  natanael_net:
+    driver: bridge
+    ipam:
+      config:
+        # Bloco de endereçamento interno para a rede
+        - subnet: 172.20.0.0/24
+
+services:
+
+  # B: Servidor DNS Primário (Bind) - ns.natanael.asa.br
+  dns:
+    container_name: dns_b
+    build:
+      context: .
+      dockerfile: dns/Dockerfile
+    ports:
+      # Exposição da porta 53 para o Host
+      - "53:53/udp"
+      - "53:53/tcp"
+    networks:
+      natanael_net:
+        # IP estático para o DNS (resolução interna)
+        ipv4_address: 172.20.0.2
+    cap_add:
+      - NET_ADMIN
+    restart: always
+
+  # A: Proxy Reverso (Nginx) - proxy.natanael.asa.br
+  proxy:
+    container_name: proxy_a
+    build:
+      context: .
+      dockerfile: proxy/Dockerfile
+    ports:
+      # Exposição da porta 80 do proxy para o Host
+      - "80:80"
+    networks:
+      natanael_net:
+        # IP estático para o Proxy (Target dos registros DNS)
+        ipv4_address: 172.20.0.10
+    depends_on:
+      - dns
+      - web_www
+      - web_mail
+    # Garante que este container use o DNS interno para resolver web_www e web_mail
+    dns:
+      - 172.20.0.2
+    restart: always
+
+  # C: Servidor Web 1 (www.natanael.asa.br)
+  web_www:
+    container_name: web_www_c
+    build:
+      context: .
+      dockerfile: web_www/Dockerfile
+    networks:
+      natanael_net:
+        # IP estático (Backend 1)
+        ipv4_address: 172.20.0.11
+    expose:
+      - "80" # Apenas exposição interna para o Proxy
+    dns:
+      - 172.20.0.2
+    restart: always
+
+  # D: Servidor Web 2 (mail.natanael.asa.br)
+  web_mail:
+    container_name: web_mail_d
+    build:
+      context: .
+      dockerfile: web_mail/Dockerfile
+    networks:
+      natanael_net:
+        # IP estático (Backend 2)
+        ipv4_address: 172.20.0.12
+    expose:
+      - "80" # Apenas exposição interna para o Proxy
+    dns:
+      - 172.20.0.2
+    restart: always
