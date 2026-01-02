@@ -1,0 +1,23 @@
+zone "provedor.asa.br" {
+    type master;
+    file "/etc/bind/db.provedor.asa.br";
+    allow-transfer { none; };
+};
+
+zone "cliente1.com.br" {
+    type master;
+    file "/etc/bind/db.cliente1.com.br";
+    
+};
+
+zone "cliente2.com.br" {
+    type master;
+    file "/etc/bind/db.cliente2.com.br";
+    
+};
+
+zone "cliente3.com.br" {
+    type master;
+    file "/etc/bind/db.cliente3.com.br";
+    
+};

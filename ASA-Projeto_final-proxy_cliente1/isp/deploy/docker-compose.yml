@@ -1,0 +1,47 @@
+services:
+  bind9:
+    image: internetsystemsconsortium/bind9:9.18
+    container_name: bind9
+    volumes:
+      - ../core/dns/named.conf:/etc/bind/named.conf
+      - ../core/dns/named.conf.options:/etc/bind/named.conf.options
+      - ../core/dns/named.conf.local:/etc/bind/named.conf.local
+      - ../core/dns/db.provedor.asa.br:/etc/bind/db.provedor.asa.br
+      - ../core/dns/db.cliente1.com.br:/etc/bind/db.cliente1.com.br
+      - ../core/dns/db.cliente2.com.br:/etc/bind/db.cliente2.com.br
+      - ../core/dns/db.cliente3.com.br:/etc/bind/db.cliente3.com.br
+    networks:
+      - core-net
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    restart: unless-stopped
+
+  # --- INFRAESTRUTURA ISP ---
+  portal:
+    image: nginx:alpine
+    container_name: portal
+    volumes:
+      - ../core/portal:/usr/share/nginx/html:ro
+    networks:
+      - core-net
+    expose:
+      - "80"
+    restart: unless-stopped
+
+  proxy-reverse:
+    image: nginx:latest
+    container_name: proxy-reverse
+    volumes:
+      - ../core/proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - core-net
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+
+networks:
+  core-net:
+    driver: bridge
+    name: core-net

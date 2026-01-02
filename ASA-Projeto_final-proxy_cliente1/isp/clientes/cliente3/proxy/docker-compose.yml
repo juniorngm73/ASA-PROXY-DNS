@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # O Proxy Reverso do Cliente 3
+  proxy-cliente3:
+    image: nginx:alpine
+    container_name: proxy-reverso-c3
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - core-net
+      - rede_interna_c3
+    depends_on:
+      - portal-c3
+      - cms-c3
+
+  # Serviços Internos do Cliente 3
+  portal-c3:
+    image: nginx:alpine
+    container_name: portal-c3
+    volumes:
+      - ../portal:/usr/share/nginx/html:ro  # Mapeia sua pasta portal
+    networks:
+      - rede_interna_c3
+
+  cms-c3:
+    image: nginx:alpine
+    container_name: cms-c3
+    volumes:
+      - ../cms:/usr/share/nginx/html:ro # Mapeia sua pasta cms
+    networks:
+      - rede_interna_c3
+
+networks:
+  core-net:
+    external: true
+  rede_interna_c3:
+    driver: bridge

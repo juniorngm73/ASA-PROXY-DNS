@@ -1,0 +1,194 @@
+:root {
+  --bg: #f7f8fb;
+  --card: #ffffff;
+  --accent: #0066cc;
+  --accent-hover: #005bb5; 
+  --muted: #6b7280;
+  --text: #111;
+  --spacing-sm: 1rem;
+  --spacing-lg: 3rem;
+}
+
+/* Reset Básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos de Corpo */
+body {
+  font-family: Inter, system-ui, Arial, sans-serif;
+  line-height: 1.5;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Centralização de Layout Principal */
+.container {
+  max-width: 1100px;
+  /* Garante a centralização horizontal */
+  margin: 0 auto; 
+  padding: var(--spacing-sm);
+}
+
+/* Classes Utilitárias */
+.section-padding {
+  padding: var(--spacing-lg) 0; /* Padding vertical para seções */
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-align: center; 
+}
+
+/* --- Header --- */
+.site-header {
+  background: linear-gradient(90deg, #004e92, #000428);
+  color: #fff;
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.main-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+  color: var(--accent);
+}
+
+/* --- Hero Section --- */
+.hero {
+  text-align: center; 
+}
+
+.hero h2 {
+  margin-bottom: 0.5rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem); 
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.hero p {
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+/* --- Cards (Onde o layout uniforme é definido) --- */
+.cards {
+  display: grid;
+  /* Cria colunas responsivas, garantindo no mínimo 280px por card */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  gap: 1.5rem;
+  margin-top: 2rem;
+  align-items: stretch; /* Garante que todos os cards tenham a mesma altura */
+}
+
+.card {
+  background: var(--card);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  /* Flexbox para empurrar o botão para o final */
+  display: flex; 
+  flex-direction: column;
+  text-align: left;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  flex-grow: 1; /* Força o parágrafo a crescer, empurrando o botão para baixo */
+  margin-bottom: 1rem;
+}
+
+/* --- Botões --- */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 500;
+  text-align: center;
+  transition: background 0.3s ease;
+  white-space: nowrap; 
+  align-self: flex-start; /* Alinha o botão à esquerda dentro do card */
+}
+
+.btn:hover {
+  background: var(--accent-hover);
+}
+
+/* --- Footer --- */
+.site-footer {
+  padding: var(--spacing-sm) 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* --- Responsivo --- */
+@media (max-width: 640px) {
+  .site-header .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .main-nav {
+    margin-top: 1rem;
+  }
+
+  .section-padding {
+    padding: 2rem 0; 
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+  }
+
+  /* Faz o botão preencher a largura total do card em telas pequenas */
+  .card .btn {
+      width: 100%;
+      align-self: stretch;
+  }
+}

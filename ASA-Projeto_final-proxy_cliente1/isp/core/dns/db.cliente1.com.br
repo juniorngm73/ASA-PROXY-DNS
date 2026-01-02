@@ -1,0 +1,14 @@
+$TTL    604800
+@       IN      SOA     ns.cliente1.com.br. admin.cliente1.local. (
+                        2025121801 ; Serial ajustado para 10 digitos
+                        604800
+                        86400
+                        2419200
+                        604800 )
+
+@       IN      NS      ns.cliente1.com.br.
+@       IN      A       10.24.5.48
+ns      IN      A       10.24.5.48
+portal  IN      A       10.24.5.48
+hotsite IN      A       10.24.5.48
+sign    IN      A       10.24.5.48

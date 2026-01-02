@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # O Proxy Reverso do Cliente 2
+  proxy-cliente2:
+    image: nginx:alpine
+    container_name: proxy-reverso-c2
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - core-net
+      - rede_interna_c2
+    depends_on:
+      - portal-c2
+      - cms-c2
+
+  # Serviços Internos do Cliente 2
+  portal-c2:
+    image: nginx:alpine
+    container_name: portal-c2
+    volumes:
+      - ../portal:/usr/share/nginx/html:ro  # Mapeia sua pasta portal
+    networks:
+      - rede_interna_c2
+
+  cms-c2:
+    image: nginx:alpine
+    container_name: cms-c2
+    volumes:
+      - ../cms:/usr/share/nginx/html:ro # Mapeia sua pasta cms
+    networks:
+      - rede_interna_c2
+
+networks:
+  core-net:
+    external: true
+  rede_interna_c2:
+    driver: bridge
