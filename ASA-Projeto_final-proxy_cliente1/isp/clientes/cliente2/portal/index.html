@@ -3,84 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PORTAL CLIENTE 2</title>
+    <title>Net Telecom — Soluções em Redes</title>
     <style>
-        /* Estilos rápidos direto no HTML */
+        /* Estilos Gerais */
+        :root {
+            --primary: #0056b3;
+            --secondary: #00a8e8;
+            --dark: #1a1a1a;
+            --light: #f4f7f6;
+            --white: #ffffff;
+        }
+
         body {
-            background-color: #ff00ff; /* Magenta/Fúcsia */
-            color: white;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
         }
-        header {
-            background-color: #1e7e34; /* Verde mais escuro para o topo */
-            padding: 40px;
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Cabeçalho e Logo */
+        .site-header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            border: 2px solid var(--secondary);
+        }
+
+        .main-nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .main-nav a:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 80px 0;
             text-align: center;
         }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+
+        .hero h2 { font-size: 2.5rem; margin-bottom: 20px; }
+
+        /* Serviços (Cards) */
+        .section-padding { padding: 60px 0; }
+        .section-title { text-align: center; margin-bottom: 40px; font-size: 2rem; }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
-        .product-card {
-            background-color: white;
-            color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            width: 250px;
-            text-align: center;
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border-top: 5px solid var(--primary);
         }
-        .product-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: contain;
-        }
-        .price {
-            color: #28a745;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .buy-btn {
+
+        .card:hover { transform: translateY(-5px); }
+
+        .btn {
             display: inline-block;
-            background-color: #28a745;
-            color: white;
+            background: var(--primary);
+            color: var(--white);
             padding: 10px 20px;
             text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>O PORTAL LEVA ÀS OFERTAS - CLIENTE 222222222222</h1>
-    <p>As melhores ofertas em computadores e acessórios</p>
-</header>
-
-<main class="container">
-    <div class="product-card">
-        <img src="assets/images/notebookgamer.jpg" alt="Notebook Gamer">
-        <h3>Notebook Gamer i7</h3>
-        <p class="price">R$ 222222222222</p>
-        <a href="#" class="buy-btn">Comprar</a>
+  <header class="site-header">
+    <div class="container header-content">
+      <a href="#" class="brand">
+        <div class="logo-icon">🌐</div> 
+        Net Telecom
+      </a>
+      <nav class="main-nav">
+        <a href="#services">Serviços</a>
+        <a href="#support">Suporte</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="product-card">
-        <img src="assets/images/pc-gamer.png" alt="PC Gamer">
-        <h3>PC Gamer Ryzen 7</h3>
-        <p class="price">R$ 222222222222</p>
-        <a href="#" class="buy-btn">Comprar</a>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h2>Sua empresa conectada ao mundo</h2>
+        <p>Infraestrutura de alta performance e soluções inteligentes em redes de computadores.</p>
+      </div>
+    </section>
+
+    
+
+    <section id="services" class="container section-padding">
+      <h2 class="section-title">Nossos Serviços</h2>
+      <div class="cards">
+        
+        <article class="card">
+          <h3>Projetos de Redes</h3>
+          <p>Desenvolvimento e implementação de topologias LAN/WAN estruturadas para máxima eficiência.</p>
+        </article>
+
+        <article class="card">
+          <h3>Segurança & Firewall</h3>
+          <p>Proteção de dados com configurações avançadas de Firewall, VPNs e Proxy Reverso.</p>
+        </article>
+
+        <article class="card">
+          <h3>Servidores & Nuvem</h3>
+          <p>Configuração de servidores DNS, hospedagem de serviços e integração com a nuvem.</p>
+        </article>
+
+        <article class="card">
+          <h3>Monitoramento 24/7</h3>
+          <p>Gestão proativa da sua rede para garantir 99.9% de disponibilidade (Uptime).</p>
+        </article>
+
+        <article class="card">
+          <h3>Cabeamento Estruturado</h3>
+          <p>Instalação profissional de fibra óptica e par trançado seguindo normas internacionais.</p>
+        </article>
+
+        <article class="card">
+          <h3>Soluções Wi-Fi Corporativo</h3>
+          <p>Cobertura total e segura para grandes áreas com gestão centralizada de usuários.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="support" class="section-padding" style="background-color: #e9ecef;">
+      <div class="container" style="text-align: center;">
+        <h2 class="section-title">Suporte Técnico</h2>
+        <p>Precisa de assistência especializada ou orçamento?</p>
+        <p>E-mail: <strong>contato@nettelecom.com.br</strong></p>
+        <a href="mailto:contato@nettelecom.com.br" class="btn">Falar com um Especialista</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Net Telecom — Conectando o futuro hoje.</p>
     </div>
-</main>
-
-<footer style="text-align: center; padding: 20px;">
-    <p>© 2025 Black Friday Tech — Cliente 2</p>
-</footer>
+  </footer>
 
 </body>
 </html>

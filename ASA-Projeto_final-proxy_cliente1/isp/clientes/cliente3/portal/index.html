@@ -3,84 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PORTAL CLIENTE 33333333333</title>
+    <title>Intercom Soluções — Alta Velocidade e Conectividade</title>
     <style>
-        /* Estilos rápidos direto no HTML */
+        /* Estilos Gerais */
+        :root {
+            --primary: #28a745; /* Verde Principal */
+            --secondary: #1e7e34; /* Verde Escuro */
+            --accent: #d4edda;
+            --dark: #1a1a1a;
+            --light: #f4f7f6;
+            --white: #ffffff;
+        }
+
         body {
-            background-color: #800000; /* Marrom avermelhado / Vinho */
-            color: white;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
         }
-        header {
-            background-color: #1e7e34; /* Verde mais escuro para o topo */
-            padding: 40px;
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Cabeçalho */
+        .site-header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 8px; /* Quadrado arredondado para diferenciar */
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .main-nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: var(--white);
+            padding: 80px 0;
             text-align: center;
         }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
+
+        .hero h2 { font-size: 2.8rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; opacity: 0.9; }
+
+        /* Destaque de Velocidade */
+        .speed-highlight {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            padding: 20px;
+            border-radius: 12px;
+            margin: -40px auto 40px;
+            max-width: 800px;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            align-items: center;
+            justify-content: space-around;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .speed-item h4 { margin: 0; color: var(--secondary); font-size: 0.9rem; text-transform: uppercase; }
+        .speed-item p { margin: 0; font-size: 1.8rem; font-weight: bold; color: var(--dark); }
+
+        /* Cards */
+        .section-padding { padding: 40px 0; }
+        .section-title { text-align: center; margin-bottom: 40px; font-size: 2rem; }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
-        .product-card {
-            background-color: white;
-            color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            width: 250px;
-            text-align: center;
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border-left: 5px solid var(--primary);
         }
-        .product-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: contain;
-        }
-        .price {
-            color: #28a745;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .buy-btn {
+
+        .card:hover { transform: scale(1.02); }
+
+        /* Botão */
+        .btn {
             display: inline-block;
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 25px;
             text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover { background: var(--secondary); }
+
+        .site-footer {
+            background: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>O PORTAL LEVA ÀS OFERTAS - CLIENTE3</h1>
-    <p>As melhores ofertas em computadores e acessórios</p>
-</header>
+  <header class="site-header">
+    <div class="container header-content">
+      <a href="#" class="brand">
+        <div class="logo-icon">📡</div> 
+        Intercom Soluções
+      </a>
+      <nav class="main-nav">
+        <a href="#speed">Velocidade</a>
+        <a href="#services">Serviços</a>
+        <a href="#contact">Contato</a>
+      </nav>
+    </div>
+  </header>
 
-<main class="container">
-    <div class="product-card">
-        <img src="assets/images/notebookgamer.jpg" alt="Notebook Gamer">
-        <h3>Notebook Gamer i7</h3>
-        <p class="price">R$ 3333333333333</p>
-        <a href="#" class="buy-btn">Comprar</a>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h2>Conectividade Sem Limites</h2>
+        <p>Internet de Ultra Velocidade com a estabilidade que seu negócio exige.</p>
+      </div>
+    </section>
+
+    <div class="container" id="speed">
+        <div class="speed-highlight">
+            <div class="speed-item">
+                <h4>Download até</h4>
+                <p>1 Giga</p>
+            </div>
+            <div style="width: 2px; height: 50px; background: #eee;"></div>
+            <div class="speed-item">
+                <h4>Tecnologia</h4>
+                <p>100% Fibra</p>
+            </div>
+            <div style="width: 2px; height: 50px; background: #eee;"></div>
+            <div class="speed-item">
+                <h4>Latência</h4>
+                <p>&lt; 5ms</p>
+            </div>
+        </div>
     </div>
 
-    <div class="product-card">
-        <img src="assets/images/pc-gamer.png" alt="PC Gamer">
-        <h3>PC Gamer Ryzen 7</h3>
-        <p class="price">R$ 333333333333</p>
-        <a href="#" class="buy-btn">Comprar</a>
-    </div>
-</main>
+    <section id="services" class="container section-padding">
+      <h2 class="section-title">Soluções Corporativas</h2>
+      <div class="cards">
+        
+        <article class="card">
+          <h3>Link Dedicado</h3>
+          <p>Garantia de banda 1:1 e SLA de 99,9% para empresas que não podem parar.</p>
+        </article>
 
-<footer style="text-align: center; padding: 20px;">
-    <p>© 2025 Black Friday Tech — Cliente 33333333333</p>
-</footer>
+        <article class="card">
+          <h3>Interligação de Unidades</h3>
+          <p>Conecte suas filiais com redes LAN-to-LAN de alta performance e baixa latência.</p>
+        </article>
+
+        <article class="card">
+          <h3>Wi-Fi de Alta Densidade</h3>
+          <p>Soluções preparadas para centenas de dispositivos simultâneos com segurança total.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="contact" class="section-padding" style="background-color: var(--accent);">
+      <div class="container" style="text-align: center;">
+        <h2 class="section-title">Pronto para acelerar?</h2>
+        <p>Fale agora com nossos consultores e descubra o plano ideal para você.</p>
+        <a href="mailto:comercial@intercomsolucoes.com.br" class="btn">Solicitar Orçamento Grátis</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Intercom Soluções — A velocidade que move o seu negócio.</p>
+    </div>
+  </footer>
 
 </body>
 </html>
