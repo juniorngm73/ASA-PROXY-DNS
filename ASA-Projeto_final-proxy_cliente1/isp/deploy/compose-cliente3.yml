@@ -1,0 +1,32 @@
+services:
+  db-cms-c3:
+    image: mariadb:10.11
+    container_name: cliente3-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_pass_c3
+      MYSQL_DATABASE: wp_cliente3
+      MYSQL_USER: user_c3
+      MYSQL_PASSWORD: pass_user_c3
+    volumes:
+      - ../clientes/cliente3/cms/data:/var/lib/mysql
+
+  cms-c3:
+    depends_on:
+      - db-cms-c3
+    image: wordpress:latest
+    container_name: cliente3-cms
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db-cms-c3:3306
+      WORDPRESS_DB_USER: user_c3
+      WORDPRESS_DB_PASSWORD: pass_user_c3
+      WORDPRESS_DB_NAME: wp_cliente3
+    volumes:
+      - ../clientes/cliente3/cms/html:/var/www/html
+    networks:
+      - rede-isp-core
+
+networks:
+  rede-isp-core:
+    external: true

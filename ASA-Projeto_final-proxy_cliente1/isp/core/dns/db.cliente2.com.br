@@ -7,7 +7,7 @@ $TTL    604800
                         604800 )
 
 @       IN      NS      ns.cliente2.com.br.
-@       IN      A       10.24.5.48
-ns      IN      A       10.24.5.48
-portal  IN      A       10.24.5.48
-cms     IN      A       10.24.5.48
+@       IN      A       10.24.22.210
+ns      IN      A       10.24.22.210
+portal  IN      A       10.24.22.210
+cms     IN      A       10.24.22.210

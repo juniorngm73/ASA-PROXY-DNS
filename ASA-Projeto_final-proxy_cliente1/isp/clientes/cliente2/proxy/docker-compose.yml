@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # O Proxy Reverso do Cliente 2
   proxy-cliente2:
     image: nginx:alpine
     container_name: proxy-reverso-c2
@@ -12,24 +11,41 @@ services:
       - rede_interna_c2
     depends_on:
       - portal-c2
-      - cms-c2
+      - cliente2-cms # Alterado para o nome do serviço correto
 
-  # Serviços Internos do Cliente 2
   portal-c2:
     image: nginx:alpine
     container_name: portal-c2
     volumes:
-      - ../portal:/usr/share/nginx/html:ro  # Mapeia sua pasta portal
+      - ../portal:/usr/share/nginx/html:ro
     networks:
       - rede_interna_c2
 
-  cms-c2:
-    image: nginx:alpine
-    container_name: cms-c2
-    volumes:
-      - ../cms:/usr/share/nginx/html:ro # Mapeia sua pasta cms
+  # --- AQUI ESTÁ A MUDANÇA: Substituindo Nginx por WordPress ---
+  cliente2-cms:
+    image: wordpress:latest
+    container_name: cliente2-cms
     networks:
       - rede_interna_c2
+      - core-net # Adicionado para o Proxy Principal te enxergar
+    environment:
+      WORDPRESS_DB_HOST: cliente2-db # Nome do container do banco
+      WORDPRESS_DB_NAME: wp_cliente2
+      WORDPRESS_DB_USER: user_c2
+      WORDPRESS_DB_PASSWORD: pass_user_c2
+    depends_on:
+      - cliente2-db
+
+  cliente2-db:
+    image: mysql:5.7
+    container_name: cliente2-db
+    networks:
+      - rede_interna_c2
+    environment:
+      MYSQL_DATABASE: wp_cliente2
+      MYSQL_USER: user_c2
+      MYSQL_PASSWORD: pass_user_c2
+      MYSQL_ROOT_PASSWORD: root_pass_c2
 
 networks:
   core-net:

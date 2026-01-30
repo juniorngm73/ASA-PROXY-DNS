@@ -1,0 +1,35 @@
+services:
+  # Banco de Dados do Cliente 2
+  db-cms-c2:
+    image: mariadb:10.11
+    container_name: cliente2-db
+    command: '--default-authentication-plugin=mysql_native_password'
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_pass_c2
+      MYSQL_DATABASE: wp_cliente2
+      MYSQL_USER: user_c2
+      MYSQL_PASSWORD: pass_user_c2
+    volumes:
+      - ../clientes/cliente2/cms/data:/var/lib/mysql
+
+  # WordPress do Cliente 2
+  cms-c2:
+    depends_on:
+      - db-cms-c2
+    image: wordpress:latest
+    container_name: cliente2-cms
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db-cms-c2:3306
+      WORDPRESS_DB_USER: user_c2
+      WORDPRESS_DB_PASSWORD: pass_user_c2
+      WORDPRESS_DB_NAME: wp_cliente2
+    volumes:
+      - ../clientes/cliente2/cms/html:/var/www/html
+    networks:
+      - rede-isp-core
+
+networks:
+  rede-isp-core:
+    external: true
