@@ -37,7 +37,7 @@ services:
       - cliente2-db
 
   cliente2-db:
-    image: mysql:5.7
+    image: mariadb:10.11
     container_name: cliente2-db
     networks:
       - rede_interna_c2
