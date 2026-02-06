@@ -1,10 +1,7 @@
 # NOTA: Restrições comentadas para facilitar testes locais.
 
-# Usaremos o Ubuntu para hospedar este serviço. Por ser baseado no Debian, o Ubuntu busca
-# por padrão o nome de domínio no arquivo /etc/mailname, a não ser que se defina uma origem
-# manualmente, como fizemos logo abaixo.
-
-myorigin = mymail.com.br
+# Usaremos o Ubuntu para hospedar este serviço. 
+myorigin = provedor.asa.br
 
 smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
 biff = no
@@ -15,21 +12,19 @@ delay_warning_time = 12h
 
 readme_directory = no
 
+# Nível de compatibilidade para evitar avisos em versões novas
 compatibility_level = 2
 
-# Parâmetros TLS (Criptografia)
-# CONFIGURAÇÃO DE TESTE: TLS Desativado (Conteúdo trafega em texto puro).
+# Parâmetros TLS (Criptografia) - DESATIVADO PARA TESTES
 smtpd_tls_security_level = none
-#smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
-#smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 
-# Restrições de relay (retransmissão) do smtpd
-#smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
-
-myhostname = mymail.com.br
+myhostname = mail.provedor.asa.br
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
-mydestination = $myhostname, /etc/mailname, localhost, localhost.localdomain, localhost
+
+# Destinos que o servidor aceita entregar localmente
+mydestination = $myhostname, provedor.asa.br, localhost, localhost.localdomain, localhost
+
 relayhost = 
 
 # CONFIGURAÇÃO DE REDE PARA TESTES LOCAIS
