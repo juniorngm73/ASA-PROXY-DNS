@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: webmail_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: meu_webmail
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - webmail-internal
+
+  app:
+    build: .
+    container_name: webmail_php
+    restart: always
+    volumes:
+      - ./src:/var/www/html
+    environment:
+      - MAIL_SERVER=email  # Nome do serviço lá no Compose do ISP
+    depends_on:
+      - db
+    networks:
+      - webmail-internal
+      - core-net  # Conecta à rede do servidor de e-mail
+
+  web:
+    image: nginx:alpine
+    container_name: webmail_nginx
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+    networks:
+      - webmail-internal
+
+networks:
+  webmail-internal: # Rede para PHP e MySQL conversarem
+  core-net:
+    external: true # Indica que esta rede já foi criada pelo outro Compose (do ISP)
+
+volumes:
+  db_data:

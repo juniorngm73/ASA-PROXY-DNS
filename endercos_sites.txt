@@ -1,0 +1,13 @@
+http://webmail.provedor.asa.br/
+
+http://potiguarnet.provedor.asa.br/
+
+http://portal.cliente1.com.br/
+http://sign.cliente1.com.br/
+http://hotsite.cliente1.com.br/
+
+http://portal.cliente2.com.br/
+http://cms.cliente2.com.br/
+
+http://portal.cliente3.com.br/
+http://cms.cliente3.com.br/

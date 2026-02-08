@@ -17,7 +17,32 @@ services:
       - "53:53/tcp"
     restart: unless-stopped
 
-  # --- INFRAESTRUTURA ISP ---
+  email:
+    build: ../core/email
+    container_name: servidor_email
+    networks:
+      - core-net
+    ports:
+      - "25:25"
+      - "143:143"
+      - "110:110"
+    volumes:
+      - ../core/email/mail_data:/home
+    restart: unless-stopped
+
+  webmail:
+    image: php:8.1-fpm-alpine
+    container_name: webmail_php
+    volumes:
+      - ../core/webmail:/var/www/html
+    networks:
+      - core-net
+    command: >
+      sh -c "apk add --no-cache imap-dev krb5-dev openssl-dev ssmtp && 
+             docker-php-ext-configure imap --with-kerberos --with-imap-ssl && 
+             docker-php-ext-install imap && 
+             php-fpm"
+    restart: unless-stopped
   portal:
     image: nginx:alpine
     container_name: portal
@@ -34,6 +59,7 @@ services:
     container_name: proxy-reverse
     volumes:
       - ../core/proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../core/webmail:/var/www/html:ro
     networks:
       - core-net
     ports:
@@ -43,5 +69,4 @@ services:
 
 networks:
   core-net:
-    driver: bridge
-    name: core-net
+    external: true # Como a rede já existe e está em uso, usamos 'external'

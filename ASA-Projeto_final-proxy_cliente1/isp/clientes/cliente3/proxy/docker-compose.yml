@@ -6,7 +6,7 @@ services:
     image: nginx:alpine
     container_name: proxy-reverso-c3
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
       - core-net
       - rede_interna_c3
